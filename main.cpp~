@@ -6,6 +6,7 @@
  */
 
 #include <cstdlib>
+#include "serial_manager.hpp"
 #include "glApplication.h"
 #include "glCartesianGraphic.hpp"
 
@@ -25,15 +26,17 @@ public:
 int main(int argc, char *argv[])
 {
     
+    Serial S("/dev/ttyACM0");
     myApplication* pApp = new myApplication;
     glCartesianGraphic* gyroWindow = new glCartesianGraphic(200,300,100,100);
     gyroWindow->SetTitle("datos acelerometro y giroscopio");
     gyroWindow->SetAxisPosition(AXIS_VERTICAL_CENTERED | AXIS_HORIZONTAL_CENTERED);
     gyroWindow->SetDrawBox(false);
+    //S.ConnectCallBack();
     pApp->run();
     
     while(1){
-        sleep(10);
+        sleep(1);
     };
     
     delete pApp;
