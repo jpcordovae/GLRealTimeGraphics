@@ -4,4 +4,4 @@ all:
 	gcc -o GL2DGraphics main.cpp glApplication.cpp glutwindow.cpp glCartesianGraphic.cpp glWindow.cpp -I./nvMath -lglut -lboost_system -lboost_thread
 
 clean:
-	rm -rt *o GL2DGraphics
+	rm -rf *o GL2DGraphics
