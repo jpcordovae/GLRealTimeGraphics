@@ -40,15 +40,3 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
-/*
-int main(int argc, char** argv)
-{
-    Serial S("/dev/ttyACM0");
-    cwc::glutWindow *win = new cwc::glutWindow();
-    while(1)
-    {
-        sleep(1);
-    }
-    return 0;
-}
- */

@@ -18,6 +18,7 @@
 #include <vector>
 #include <list>
 #include "nvMath/nvMath.h"
+#include "DataPair.hpp"
 
 enum AXIS_DATA_DEPLOYMENT{ AXIS_FIXED=0x01,
 									AXIS_ALL,
@@ -38,7 +39,7 @@ enum TITLE_POSITION {TITLE_UP=0x01,
 class glCartesianGraphic : public cwc::glutWindow 
 {
 public:
-		
+	
 	~glCartesianGraphic();
 
 	glCartesianGraphic(int _width, int _height, int _posx, int _posy) // TODO
@@ -104,12 +105,20 @@ public:
 	void SetTitlePosition(enum TITLE_POSITION _title_position);
 	void SetAxisPosition(enum AXIS_POSITION _axis_position);
 	void SetAxisDataDeployment(enum AXIS_DATA_DEPLOYMENT _data_deployment);
+	
+	void SetBufferSizeToShow(size_t _amount) // how many data we will show
+	{
+		m_axis_data_deployment = AXIS_LAST_DATA; // warning !!, not thread safe
+		m_data_count_to_show = _amount;
+	}
+	
 private:
 	void DrawAxis(void);
 	void DrawBox(void);
 	void DrawTitle(enum TITLE_POSITION _title_position, const std::string &_title);
 	void DrawTitle(void);
 	void DrawAxisSubdivision(void);
+	void DrawDataPairs(void);
 	std::string m_title;
 	enum TITLE_POSITION m_title_position;
 	enum AXIS_POSITION m_axis_position;
@@ -126,6 +135,8 @@ private:
 	float m_axis_x_min, m_axis_x_max; // axis limits
 	float m_axis_y_min, m_axis_y_max; // axis limits
 	float m_border;
+	
+	std::list< boost::shared_ptr<DataPair<boost::posix_time::ptime,float> > > m_timed_pair_list;
 };
 
 inline AXIS_POSITION operator|(AXIS_POSITION a, AXIS_POSITION b)

@@ -45,7 +45,7 @@ void drawString (const char *s)
 {
   for (size_t i = 0; i < strlen (s); i++)
     glutBitmapCharacter (GLUT_BITMAP_HELVETICA_10, s[i]);
-};
+}
 
 void glCartesianGraphic::OnRender()
 {
@@ -191,4 +191,28 @@ void glCartesianGraphic::DrawAxisSubdivision(void)
         glVertex2f(-glutGet(GLUT_WINDOW_WIDTH)*0.02,y);
     }
     glEnd();
+}
+
+void glCartesianGraphic::DrawDataPairs(void){
+    // if there is no list to draw
+    if(m_timed_pair_list.empty()) {
+        return;
+    }
+
+    size_t pixels_x = glutGet(GLUT_WINDOW_WIDTH )*(1-m_border*2); // total amount of pixels to draw the lines
+    size_t pixels_y = glutGet(GLUT_WINDOW_HEIGHT)*(1-m_border*2); // total amount of pixels to draw the lines
+    //float fit_x = pixels_x/count; // if fit>1, we have more data that we can draw
+    //float fit_y = pixels_y/count; // if fit>1, we have more data that we can draw
+    
+    
+    
+    std::list< boost::shared_ptr<DataPair<boost::posix_time::ptime,float> > >::iterator it = m_timed_pair_list.begin();
+    for(;it!=m_timed_pair_list.end();++it){
+        //size_t count = *it->count();
+        //if( count < m_data_count_to_show )
+        {
+            //
+        }
+        
+    }
 }
